@@ -53,10 +53,11 @@ public class PassSignerImpl implements PassSigner {
 		/**
 		 * Deprecated in favor of calling {@code keystore(InputStream, String)}
 		 * followed by setting the alias with {@code alias(String)}
-		 * @param keyStore
+		 * @param inputStream
 		 * @param alias
 		 * @param password
 		 * @return
+		 * @throws PassSigningException
 		 */
 		@Deprecated
 		public Builder keystore(InputStream inputStream, String alias, String password) throws PassSigningException {
@@ -106,6 +107,11 @@ public class PassSignerImpl implements PassSigner {
 			return this;
 		}
 
+		/**
+		 * 
+		 * @return
+		 * @throws PassSigningException
+		 */
 		public PassSigner build() throws PassSigningException {
 			if (signingCertificate == null) {
 				signingCertificate = getCertificate(keyStore, signingCertificateAlias);
